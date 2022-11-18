@@ -6,7 +6,7 @@ import re
 class SpamFilter():
     def __init__(self):
         self.fileNames = ["ups.txt", "staples.txt", "glassdoor.txt",
-                          "spamexample.txt", "test.txt", "affirm.txt", "google.txt", "lucid.txt", "instacart.txt", "intern.txt", "zillow.txt", "ups2.txt", "paypal.txt", "honey.txt", "tabajo.txt"]
+                          "spamexample.txt", "job.txt",  "apt.txt", "test.txt", "indeed.txt", "affirm.txt", "google.txt", "bestbuy.txt",  "lucid.txt", "instacart.txt", "intern.txt", "intern2.txt", "zillow.txt", "ups2.txt", "paypal.txt", "honey.txt", "tabajo.txt"]
         self.hashes = []
         self.links = ["http://links4.upsemail.com",
                       "https://www.google.com/url?q=https://delighted.com/e/en-x-insta-cart/c/juInXzZ6hPRL34oM9tRwgmTI/0/00vXlNt7&amp;source=gmail&amp;ust=1668893715674000&amp;usg=AOvVaw2OHXQcgLnWtNinkbpk8ssl", "paypal.com", "https://links.joinhoney.com/u/click?_t=70657193eb7a404887947be80fb10777", "affirm.com"]
@@ -49,15 +49,14 @@ class SpamFilter():
                 print(f"{i} contains a blacklisted link, and is spam")
             else:
                 if self.checkAgainstHashes(finalBody):
-                    print("This email was found in the spam hash list")
+                    print(f"{i}This email was found in the spam hash list")
                     sleep(.25)
                 else:
                     if self.checkForUnsubscribe(entireBody):
-                        print(f"File: {i} is not spam")
+                        print(f"{i} is not spam")
                         sleep(.25)
                     else:
-                        print("Unsubscribe not found in " +
-                              i + " adding body to hash list")
+                        print(f"{i} has no unsubscribe link, adding to hashlist")
                         sleep(.25)
                         result = hashlib.md5(finalBody.encode())
                         self.hashes.append(result.hexdigest())
