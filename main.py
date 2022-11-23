@@ -1,9 +1,9 @@
 from SpamFilter import SpamFilter
 
 if __name__ == "__main__":
-    joe = SpamFilter()
-    joe.presentationRun()
+    spam = SpamFilter()
+    spam.presentationRun()
     print('----------------------------\n')
-    joe.presentationRun()
-    print(len(joe.hashes), "hashes in list")
-    print(len(joe.links), "links in list")
+    spam.presentationRun()
+    print(len(spam.hashes), "hashes in list")
+    print(len(spam.links), "links in list")

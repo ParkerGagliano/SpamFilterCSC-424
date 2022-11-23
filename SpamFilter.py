@@ -6,9 +6,9 @@ import re
 class SpamFilter():
     def __init__(self):
         self.fileNames = ["ups.txt", "staples.txt", "glassdoor.txt",
-                          "spamexample.txt", "job.txt",  "apt.txt", "test.txt", "indeed.txt", "affirm.txt", "google.txt", "bestbuy.txt",  "lucid.txt", "instacart.txt", "intern.txt", "intern2.txt", "zillow.txt", "ups2.txt", "paypal.txt", "honey.txt", "tabajo.txt"]
+                          "spamexample.txt", "job.txt", 'talent.txt', "apt.txt", "test.txt", "indeed.txt", "affirm.txt", "google.txt", "bestbuy.txt",  "lucid.txt", "instacart.txt", "intern.txt", "intern2.txt", "zillow.txt", "ups2.txt", "paypal.txt", "honey.txt", "tabajo.txt"]
         self.hashes = []
-        self.links = ["http://links4.upsemail.com",
+        self.links = ["talent.com",
                       "https://www.google.com/url?q=https://delighted.com/e/en-x-insta-cart/c/juInXzZ6hPRL34oM9tRwgmTI/0/00vXlNt7&amp;source=gmail&amp;ust=1668893715674000&amp;usg=AOvVaw2OHXQcgLnWtNinkbpk8ssl", "paypal.com", "https://links.joinhoney.com/u/click?_t=70657193eb7a404887947be80fb10777", "affirm.com"]
 
     def createEmailBody(self, f):
@@ -18,7 +18,7 @@ class SpamFilter():
         emptyCounter = 0
         for i in f:
             entireBody += i
-            if emptyCounter > 3:
+            if emptyCounter > 2:
                 return finalBody
             if counter < 2:
                 pass
@@ -49,7 +49,7 @@ class SpamFilter():
                 print(f"{i} contains a blacklisted link, and is spam")
             else:
                 if self.checkAgainstHashes(finalBody):
-                    print(f"{i}This email was found in the spam hash list")
+                    print(f"{i} This email was found in the spam hash list")
                     sleep(.25)
                 else:
                     if self.checkForUnsubscribe(entireBody):
@@ -77,5 +77,4 @@ class SpamFilter():
         for i in self.links:
             if i in txt:
                 return True
-
         return False
